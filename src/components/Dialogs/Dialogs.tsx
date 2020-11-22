@@ -2,7 +2,8 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageCreator, StoreType, updateNewMessageBodyCreator} from "../../Redux/state";
+import { StoreType} from "../../Redux/store";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../Redux/dialogs-reducer";
 
 
 const Dialogs: React.FC<{ store: StoreType}> = (props) => {

@@ -1,13 +1,14 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ActionsTypes, addPostAC, PostsType, updateNewPostTextAC} from "../../../Redux/state";
+import {ActionsTypes, PostsType} from "../../../Redux/store";
+import { addPostAC, updateNewPostTextAC } from '../../../Redux/profile-reducer';
 
 
 const MyPosts:React.FC<{posts: Array<PostsType>, dispatch: (action: ActionsTypes) => void, newPostText: string}> =
     (props) => {
 
-    let postsElements = props.posts.map( p=> < Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.posts.map( p=> < Post  id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
 
 
