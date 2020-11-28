@@ -5,12 +5,11 @@ import {StoreType} from "../../types/entities";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
-const Profile: React.FC<{store: StoreType}> =
-    (props) => {
+const Profile: React.FC = () => {
 
     return <div>
         < ProfileInfo/>
-        < MyPostsContainer store={props.store} />
+        < MyPostsContainer />
     </div>
 }
 

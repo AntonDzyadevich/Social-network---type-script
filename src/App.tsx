@@ -4,12 +4,10 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from './components/Profile/Profile';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {ActionsTypes, RootStateType, StoreType} from './types/entities';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
-const App:  React.FC<{store: StoreType, state: RootStateType, dispatch: (action: ActionsTypes) => void}> =
-    ({state, store, dispatch}) => {
+const App:  React.FC = () => {
 
     return (
         <BrowserRouter>
@@ -17,8 +15,8 @@ const App:  React.FC<{store: StoreType, state: RootStateType, dispatch: (action:
                 < Header/>
                 < Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path = '/dialogs' render={() => < DialogsContainer store={store} />}/>
-                    <Route path = '/profile' render={() => < Profile store={store} />}/>
+                    <Route path = '/dialogs' render={() => < DialogsContainer  />}/>
+                    <Route path = '/profile' render={() => < Profile  />}/>
                 </div>
             </div>
         </BrowserRouter>)

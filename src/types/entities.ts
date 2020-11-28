@@ -47,3 +47,8 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
+
+// export type ProviderType = {
+//     store: StoreType
+//     children: React.ReactNode
+// }
