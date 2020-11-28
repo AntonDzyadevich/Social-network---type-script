@@ -1,5 +1,5 @@
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
+import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
 
@@ -97,16 +97,5 @@ const store: StoreType = {
         this._onChange(this._state);
     }
 }
-
-export const addPostAC = (newPostText: string) => ({type: "ADD-POST", postMessage: newPostText}) as const;
-
-export const updateNewPostTextAC = (newText: string ) => ({type: 'UPDATE-NEW-POST-TEXT', newText: newText})  as const;
-
-export const sendMessageCreator = () => ({type: "SEND-MESSAGE"}) as const;
-
-export const updateNewMessageBodyCreator = (body: string) => ({type: "UPDATE-NEW-MESSAGE-BODY", body: body}) as const;
-
-
-
 
 export default store;

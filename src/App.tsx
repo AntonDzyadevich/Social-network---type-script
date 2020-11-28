@@ -3,15 +3,13 @@ import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {RootStateType, StoreType,} from "./Redux/store";
+import {ActionsTypes, RootStateType, StoreType} from './types/entities';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
-
-
-const App:  React.FC<{store: StoreType, state: RootStateType}> =
-    ({state, store}) => {
+const App:  React.FC<{store: StoreType, state: RootStateType, dispatch: (action: ActionsTypes) => void}> =
+    ({state, store, dispatch}) => {
 
     return (
         <BrowserRouter>
@@ -19,12 +17,8 @@ const App:  React.FC<{store: StoreType, state: RootStateType}> =
                 < Header/>
                 < Navbar/>
                 <div className='app-wrapper-content'>
-
-                    <Route path = '/dialogs' render={() => < Dialogs store={store} />}/>
-                    <Route path = '/profile' render={() => < Profile profilePage = {state.profilePage}
-                                                                     dispatch={store.dispatch.bind(store)}
-                                                            />}/>
-
+                    <Route path = '/dialogs' render={() => < DialogsContainer store={store} />}/>
+                    <Route path = '/profile' render={() => < Profile store={store} />}/>
                 </div>
             </div>
         </BrowserRouter>)
