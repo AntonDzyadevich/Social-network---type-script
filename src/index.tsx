@@ -5,10 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {RootStateType} from "./types/entities";
 import store from './Redux/redux-store';
-import {Provider} from "./StoreContext";
+import {Provider} from "react-redux";
 
 
-const renderTree = (state: RootStateType) => {
+
 
     ReactDOM.render(
         <React.StrictMode>
@@ -17,14 +17,16 @@ const renderTree = (state: RootStateType) => {
             </Provider>
         </React.StrictMode>,
         document.getElementById('root'));
-}
 
 
-renderTree(store.getState())
-store.subscribe(() => {
-    const state = store.getState()
-    renderTree(state);
-})
+
+
+
+// renderTree(store.getState())
+// store.subscribe(() => {
+//     const state = store.getState()
+//     renderTree(state);
+// })
 
 
 

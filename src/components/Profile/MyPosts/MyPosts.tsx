@@ -9,12 +9,12 @@ import {PostsType} from "../../../types/entities";
 const MyPosts:React.FC<{posts: Array<PostsType>,
                         newPostText: string,
                         updateNewPostText: (text:string) => void
-                        addPost: () => void}> = (props) => {
+                        addPost: (newPostText: string) => void}> = (props) => {
 
     let postsElements = props.posts.map(p => < Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     let onAddPost = () => {
-        props.addPost();
+        props.addPost(props.newPostText);
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
