@@ -11,7 +11,7 @@ const MyPosts:React.FC<{posts: Array<PostsType>,
                         updateNewPostText: (text:string) => void
                         addPost: (newPostText: string) => void}> = (props) => {
 
-    let postsElements = props.posts.map(p => < Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.posts.map(p => < Post id={p.id} key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     let onAddPost = () => {
         props.addPost(props.newPostText);
