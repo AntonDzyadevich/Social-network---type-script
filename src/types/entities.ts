@@ -1,5 +1,6 @@
 import {addPostAC, updateNewPostTextAC} from "../Redux/profile-reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogs-reducer";
+import {followAC, setUsersAC, unFollowAC} from "../Redux/users-reducer";
 
 
 export type PostsType = {
@@ -23,6 +24,20 @@ export type MessagesType = {
     message: string
 }
 
+export type LocationType ={
+    city: string
+    country: string
+}
+
+export type UsersType = {
+    id: number
+    photoUrl: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: LocationType
+}
+
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
@@ -31,14 +46,20 @@ export type DialogsPageType = {
 
 export type SidebarType = {}
 
+export type UsersPageType = {
+    users: Array<UsersType>
+}
+
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
+    usersPage: UsersPageType
 }
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof updateNewMessageBodyCreator>
-    | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof sendMessageCreator> | ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
+
 
 export type StoreType = {
     _state: RootStateType
@@ -47,8 +68,3 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
-
-// export type ProviderType = {
-//     store: StoreType
-//     children: React.ReactNode
-// }
