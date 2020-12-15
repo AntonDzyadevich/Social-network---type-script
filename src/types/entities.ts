@@ -24,19 +24,32 @@ export type MessagesType = {
     message: string
 }
 
-export type LocationType ={
-    city: string
-    country: string
-}
 
 export type UsersType = {
+    name: string
     id: number
-    photoUrl: string
-    followed: boolean
-    fullName: string
+    photos: { small: string, large: string }
     status: string
-    location: LocationType
+    followed: boolean
 }
+
+export type UsersPageType = {
+    users: Array<UsersType>
+}
+
+export type UsersPropsType = {
+    follow: (userId: number) => void,
+    unfollow: (userId: number) =>void,
+    setUsers: (users: Array<UsersType>) => void,
+    users: Array<UsersType>
+}
+
+export type GetUsersResponseType= {
+    items: Array<UsersType>
+    totalCount: number
+    error: string | null
+}
+
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -45,10 +58,6 @@ export type DialogsPageType = {
 }
 
 export type SidebarType = {}
-
-export type UsersPageType = {
-    users: Array<UsersType>
-}
 
 export type RootStateType = {
     profilePage: ProfilePageType
