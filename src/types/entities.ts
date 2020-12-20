@@ -1,11 +1,11 @@
 import {addPostAC, updateNewPostTextAC} from "../Redux/profile-reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogs-reducer";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC, toggleIsFetchingAC,
-    unFollowAC
+    follow,
+    setCurrentPage,
+    setUsers,
+    setTotalUsersCount, toggleIsFetching,
+    unFollow
 } from "../Redux/users-reducer";
 
 
@@ -51,7 +51,7 @@ export type UsersPageType = {
 
 export type UsersPropsType = {
     follow: (userId: number) => void
-    unfollow: (userId: number) =>void
+    unFollow: (userId: number) =>void
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount:(totalCount: number) => void
@@ -87,8 +87,8 @@ export type RootStateType = {
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof updateNewMessageBodyCreator> | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setUsersTotalCountAC> | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof follow> | ReturnType<typeof unFollow> | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage> | ReturnType<typeof  setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
 
 
 export type StoreType = {
