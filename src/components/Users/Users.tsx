@@ -13,6 +13,7 @@ const Users: React.FC<{
     unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
     users: Array<UsersType>
+
 } > = (props) => {
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -26,7 +27,7 @@ const Users: React.FC<{
     return <div>
         <div>
             {pages.map(p => {
-                return   <span className = { props.currentPage === p ? s.selectedPage : " " }
+                return   <span  className = { props.currentPage === p ? s.selectedPage : " " }
                                onClick={ (e) => { props.onPageChanged(p)} }>{p}</span>
             })}
 
