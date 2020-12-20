@@ -1,6 +1,6 @@
 import {addPostAC, updateNewPostTextAC} from "../Redux/profile-reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogs-reducer";
-import {followAC, setUsersAC, unFollowAC} from "../Redux/users-reducer";
+import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unFollowAC} from "../Redux/users-reducer";
 
 
 export type PostsType = {
@@ -35,13 +35,24 @@ export type UsersType = {
 
 export type UsersPageType = {
     users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+
 }
 
+
+
 export type UsersPropsType = {
-    follow: (userId: number) => void,
-    unfollow: (userId: number) =>void,
-    setUsers: (users: Array<UsersType>) => void,
+    follow: (userId: number) => void
+    unfollow: (userId: number) =>void
+    setUsers: (users: Array<UsersType>) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount:(totalCount: number) => void
     users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type GetUsersResponseType= {
@@ -66,8 +77,10 @@ export type RootStateType = {
     usersPage: UsersPageType
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof updateNewMessageBodyCreator>
-    | ReturnType<typeof sendMessageCreator> | ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyCreator> | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setUsersTotalCountAC>
 
 
 export type StoreType = {
