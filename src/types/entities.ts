@@ -1,12 +1,14 @@
-import {addPostAC, updateNewPostTextAC} from "../Redux/profile-reducer";
+import {addPostAC, updateNewPostTextAC, setUserProfileAC} from "../Redux/profile-reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogs-reducer";
 import {
     follow,
     setCurrentPage,
     setUsers,
     setTotalUsersCount, toggleIsFetching,
-    unFollow
+    unFollow,
+    UsersPageType
 } from "../Redux/users-reducer";
+
 
 
 export type PostsType = {
@@ -18,6 +20,29 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile: ProfileType | null
+}
+
+export type ProfileType = {
+    aboutMe: string | null,
+    contacts: {
+        facebook: string | null,
+        website: string | null,
+        vk: string | null,
+        twitter: string | null,
+        instagram: string | null,
+        youtube: string | null,
+        github: string | null,
+        mainLink: string | null,
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: null | string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string | undefined,
+        large: string | undefined,
+    }
 }
 
 export type DialogsType = {
@@ -30,7 +55,6 @@ export type MessagesType = {
     message: string
 }
 
-
 export type UsersType = {
     name: string
     id: number
@@ -38,37 +62,6 @@ export type UsersType = {
     status: string
     followed: boolean
 }
-
-export type UsersPageType = {
-    users: Array<UsersType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
-
-
-
-export type UsersPropsType = {
-    follow: (userId: number) => void
-    unFollow: (userId: number) =>void
-    setUsers: (users: Array<UsersType>) => void
-    setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount:(totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    users: Array<UsersType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
-
-export type GetUsersResponseType= {
-    items: Array<UsersType>
-    totalCount: number
-    error: string | null
-}
-
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -89,6 +82,7 @@ export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof upda
     | ReturnType<typeof updateNewMessageBodyCreator> | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof follow> | ReturnType<typeof unFollow> | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage> | ReturnType<typeof  setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfileAC>
 
 
 export type StoreType = {

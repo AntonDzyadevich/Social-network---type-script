@@ -1,14 +1,18 @@
 import React from 'react';
 import './Profile.module.css';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {StoreType} from "../../types/entities";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ProfileType} from "../../types/entities";
 
 
-const Profile: React.FC = () => {
+export type ProfilePropsType = {
+    profile: ProfileType | null
+}
+
+const Profile: React.FC<ProfilePropsType> = ({profile}) => {
 
     return <div>
-        < ProfileInfo/>
+        < ProfileInfo profile={profile} />
         < MyPostsContainer />
     </div>
 }
