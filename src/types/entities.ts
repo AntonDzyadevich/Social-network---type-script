@@ -8,6 +8,8 @@ import {
     unFollow,
     UsersPageType
 } from "../Redux/users-reducer";
+import {setAuthUserData, AuthType} from "../Redux/auth-reducer";
+
 
 
 
@@ -45,6 +47,8 @@ export type ProfileType = {
     }
 }
 
+
+
 export type DialogsType = {
     id: number
     name: string
@@ -55,13 +59,6 @@ export type MessagesType = {
     message: string
 }
 
-export type UsersType = {
-    name: string
-    id: number
-    photos: { small: string, large: string }
-    status: string
-    followed: boolean
-}
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -76,19 +73,20 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
     sidebar: SidebarType
     usersPage: UsersPageType
+    auth: AuthType
 }
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof updateNewMessageBodyCreator> | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof follow> | ReturnType<typeof unFollow> | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage> | ReturnType<typeof  setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
-    | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setUserProfileAC> | ReturnType<typeof setAuthUserData>
 
 
-export type StoreType = {
-    _state: RootStateType
-    _onChange: (state: RootStateType) =>  void
-    subscribe: (observer: (state: RootStateType) => void) => void
-    getState: () => RootStateType
-    dispatch: (action: ActionsTypes) => void
-}
+// export type StoreType = {
+//     _state: RootStateType
+//     _onChange: (state: RootStateType) =>  void
+//     subscribe: (observer: (state: RootStateType) => void) => void
+//     getState: () => RootStateType
+//     dispatch: (action: ActionsTypes) => void
+// }

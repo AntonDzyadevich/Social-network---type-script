@@ -5,6 +5,7 @@ import axios from "axios";
 import {ProfileType, RootStateType} from "../../types/entities";
 import {connect} from "react-redux";
 import {setUserProfileAC} from "../../Redux/profile-reducer";
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 
 type MapStatePropsType = {
@@ -15,13 +16,27 @@ type MapDispatchPropsType = {
     setUserProfileAC:(profile: ProfileType) => void
 
 }
-export type ProfileContainerPropsType = MapStatePropsType & MapDispatchPropsType;
+
+
+type PathParamsType = {
+    userId:  string
+}
+
+type ProfileContainerPropsType = MapStatePropsType & MapDispatchPropsType;
+type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
 
 
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType>{
+class ProfileContainer extends React.Component<PropsType>{
+
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/8040`)
+        debugger;
+
+        let userId = this.props.match.params.userId;
+        if(!userId) {
+            userId = '2';
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
         .then(response => {
             this.props.setUserProfileAC(response.data);
             
@@ -43,5 +58,7 @@ const mapStateToProps = (state:RootStateType): MapStatePropsType => {
 
 }
 
+const WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect<MapStatePropsType,MapDispatchPropsType, {} , RootStateType>(mapStateToProps, {setUserProfileAC}) (ProfileContainer);
+export default connect<MapStatePropsType,MapDispatchPropsType, {} , RootStateType>(mapStateToProps,
+    {setUserProfileAC}) (WithUrlDataContainerComponent);

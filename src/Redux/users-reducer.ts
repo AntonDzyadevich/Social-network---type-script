@@ -1,4 +1,4 @@
-import {ActionsTypes, UsersType} from "../types/entities";
+import {ActionsTypes} from "../types/entities";
 
 
 
@@ -9,6 +9,15 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
+
+export type UsersType = {
+    name: string
+    id: number
+    photos: { small: string, large: string }
+    status: string
+    followed: boolean
+}
+
 export type UsersPageType = {
     users: Array<UsersType>
     pageSize: number,
@@ -16,7 +25,6 @@ export type UsersPageType = {
     currentPage: number
     isFetching: boolean
 }
-
 
 const initialState = {
     users: [],
