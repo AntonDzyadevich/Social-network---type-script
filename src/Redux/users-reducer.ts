@@ -1,13 +1,12 @@
 import {ActionsTypes} from "../types/entities";
 
-
-
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
 
 export type UsersType = {
@@ -24,6 +23,7 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 const initialState = {
@@ -31,7 +31,8 @@ const initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 2,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 }
 
 
@@ -77,6 +78,13 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes)
             return{
                 ...state, isFetching: action.isFetching
             }
+            case  TOGGLE_IS_FOLLOWING_PROGRESS:
+            return{
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
 
         default:
             return state;
@@ -91,6 +99,7 @@ export const setUsers = (users: Array<UsersType>) => ({type: SET_USERS, users}) 
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage})  as const
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount})  as const;
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})  as const;
+export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})  as const;
 
 
 
