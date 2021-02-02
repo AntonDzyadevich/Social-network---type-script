@@ -1,4 +1,6 @@
-import {ActionsTypes} from "../types/entities";
+import {ActionsTypes, RootStateType} from "../types/entities";
+import {userAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -93,13 +95,59 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes)
 }
 
 
-export const follow = (userId: number) => ({type: FOLLOW, userId}) as const;
-export const unFollow = (userId: number) => ({type: UNFOLLOW, userId})  as const;
+export const followSuccess = (userId: number) => ({type: FOLLOW, userId}) as const;
+export const unfollowSuccess = (userId: number) => ({type: UNFOLLOW, userId})  as const;
 export const setUsers = (users: Array<UsersType>) => ({type: SET_USERS, users})  as const;
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage})  as const
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount})  as const;
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})  as const;
 export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})  as const;
+
+type GetStateType = () => RootStateType
+type DispatchType = Dispatch<ActionsTypes>
+
+//thunk-creators
+export const getUsers = (currentPage: number, pageSize: number ) => {
+    return (dispatch: DispatchType, getState: GetStateType) => {
+        dispatch(toggleIsFetching(true))
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+
+        });
+    }
+}
+
+export const follow = (userId: number) => {
+    return (dispatch: DispatchType, getState: GetStateType) => {
+        dispatch(toggleIsFollowingProgress(true, userId));
+
+        userAPI.follow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0){
+                    dispatch(followSuccess(userId))
+                }
+                dispatch(toggleIsFollowingProgress(false, userId))
+            });
+
+    }
+}
+
+export const unfollow = (userId: number) => {
+    return (dispatch: DispatchType, getState: GetStateType) => {
+        dispatch(toggleIsFollowingProgress(true, userId))
+
+        userAPI.unfollow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0){
+                    dispatch(unfollowSuccess(userId))
+                }
+                dispatch(toggleIsFollowingProgress(false, userId))
+            });
+    }
+}
+
 
 
 

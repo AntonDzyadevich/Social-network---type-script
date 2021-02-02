@@ -1,13 +1,13 @@
 import {addPostAC, updateNewPostTextAC, setUserProfileAC} from "../Redux/profile-reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogs-reducer";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setUsers,
     setTotalUsersCount, toggleIsFetching,
-    unFollow,
+    unfollowSuccess,
     UsersPageType,
-    toggleIsFollowingProgress
+    toggleIsFollowingProgress, follow, unfollow, getUsers
 } from "../Redux/users-reducer";
 import {setAuthUserData, AuthType} from "../Redux/auth-reducer";
 
@@ -79,7 +79,7 @@ export type RootStateType = {
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof updateNewMessageBodyCreator> | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof follow> | ReturnType<typeof unFollow> | ReturnType<typeof setUsers>
+    | ReturnType<typeof followSuccess> | ReturnType<typeof unfollowSuccess> | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage> | ReturnType<typeof  setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfileAC> | ReturnType<typeof setAuthUserData> | ReturnType<typeof toggleIsFollowingProgress>
 
