@@ -1,4 +1,6 @@
 import {PostsType, ActionsTypes, ProfilePageType, ProfileType} from "../types/entities";
+import { DispatchType } from "./users-reducer";
+import {userAPI} from "../api/api";
 
 
 const ADD_POST = 'ADD-POST';
@@ -52,7 +54,19 @@ export const addPostAC = (newPostText: string) => ({type: ADD_POST, postMessage:
 
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const;
 
+
+
 export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText}) as const;
+
+
+// thunk creator
+export const getUserProfile = (userId: string) => (dispatch: DispatchType) => {
+    userAPI.getProfile (userId).then(response => {
+        dispatch(setUserProfileAC(response.data))
+    });
+}
+
+
 
 
 export default profileReducer;

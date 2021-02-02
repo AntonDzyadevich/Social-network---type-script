@@ -1,4 +1,6 @@
 import {ActionsTypes} from "../types/entities";
+import {authAPI} from "../api/api";
+import {DispatchType} from "./users-reducer";
 
 
 const SET_USER_DATA = 'SET-USER-DATA';
@@ -40,7 +42,16 @@ const authReducer = (state: AuthType = initialState, action: ActionsTypes):AuthT
 export const setAuthUserData = (userId: number, email: string, login: string) => ({type: SET_USER_DATA,
     data: {userId, email, login}}) as const;
 
-
+// thunk creator
+export const getAuthUserData = () => (dispatch: DispatchType) => {
+    authAPI.me()
+        .then(response => {
+            if(response.data.resultCode === 0) {
+                const {id,email,login} = response.data.data
+                dispatch (setAuthUserData(id, email, login))
+            }
+        });
+};
 
 
 export default authReducer;

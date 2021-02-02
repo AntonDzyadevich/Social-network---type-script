@@ -7,7 +7,7 @@ import {
     setTotalUsersCount, toggleIsFetching,
     unfollowSuccess,
     UsersPageType,
-    toggleIsFollowingProgress, follow, unfollow, getUsers
+    toggleIsFollowingProgress
 } from "../Redux/users-reducer";
 import {setAuthUserData, AuthType} from "../Redux/auth-reducer";
 

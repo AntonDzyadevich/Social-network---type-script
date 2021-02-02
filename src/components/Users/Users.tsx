@@ -47,7 +47,7 @@ const Users: React.FC<UsersPropsType> = ({
             users.map(u => <div key={u.id}>
                 <span>
                     <div className={s.photo}>
-                       <NavLink to={'profile' + u.id}> <img src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
+                       <NavLink to={'profile/' + u.id}> <img src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
                     </div>
                     <div>
                         {u.followed

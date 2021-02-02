@@ -9,7 +9,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 const App:  React.FC = () => {
-
+debugger;
     return (
         <BrowserRouter>
             <div className='app-wrapper'>

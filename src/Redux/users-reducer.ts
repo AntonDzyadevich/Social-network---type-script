@@ -104,7 +104,7 @@ export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCH
 export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})  as const;
 
 type GetStateType = () => RootStateType
-type DispatchType = Dispatch<ActionsTypes>
+export type DispatchType = Dispatch<ActionsTypes>
 
 //thunk-creators
 export const getUsers = (currentPage: number, pageSize: number ) => {
