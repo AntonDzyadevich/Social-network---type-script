@@ -8,7 +8,8 @@ import {ActionsTypes, RootStateType} from '../../types/entities';
 
 const mapStateToProps = (state: RootStateType) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {

@@ -3,11 +3,14 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPageType} from "../../types/entities";
+import { Redirect } from 'react-router-dom';
 
 
 const Dialogs: React.FC<{onNewMessageChange: (body:string) => void,
                         onSendMessageClick: () => void,
-                        dialogsPage: DialogsPageType} >
+                        dialogsPage: DialogsPageType,
+                        isAuth: boolean
+} >
     = (props) => {
 
     const state = props.dialogsPage
@@ -24,6 +27,8 @@ const Dialogs: React.FC<{onNewMessageChange: (body:string) => void,
        let body =  e.target.value;
        props.onNewMessageChange(body)
     }
+
+    if(!props.isAuth) return  <Redirect to={'/login'} />
 
     return (
         <div className={s.dialogs}>
