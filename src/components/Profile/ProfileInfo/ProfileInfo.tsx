@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
 import defaultAvatar from "../../../assets/images/defaultAvatar.gif"
-
+import ProfileStatus from "../ProfileStatus";
 
 
 
@@ -15,12 +15,12 @@ const ProfileInfo: React.FC<ProfilePropsType> = ({profile}) => {
     const photo = profile.photos.small ? profile.photos.large : defaultAvatar;
 
     return <div>
-        <div className={s.item}>
-            <img src="https://www.comicbookraw.com/wp-content/uploads/2019/05/avengers-endgame-uhdpaper.com-8K-94.jpg"/>
-        </div>
+        {/*<div className={s.item}>*/}
+        {/*    <img src="https://www.comicbookraw.com/wp-content/uploads/2019/05/avengers-endgame-uhdpaper.com-8K-94.jpg"/>*/}
+        {/*</div>*/}
         <div className={s.descriptionBlock}>
             <img src = { photo } />
-            ava+description
+           < ProfileStatus status={"I am the best React developer"}/>
         </div>
     </div>
 }

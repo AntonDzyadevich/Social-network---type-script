@@ -10,7 +10,6 @@ import LoginPage from "./components/Login/Login";
 
 
 const App:  React.FC = () => {
-debugger;
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
