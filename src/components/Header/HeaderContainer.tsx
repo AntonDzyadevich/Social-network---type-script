@@ -14,7 +14,6 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    // setAuthUserData: (userId: number, email: string, login: string) => void
     getAuthUserData: () => void
 }
 
@@ -39,4 +38,9 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth
 
 });
-export default  connect<MapStatePropsType,MapDispatchPropsType, {} , RootStateType>(mapStateToProps, {getAuthUserData}) (HeaderContainer);
+
+export default  connect<MapStatePropsType,MapDispatchPropsType, {} , RootStateType>(mapStateToProps, {getAuthUserData})
+(HeaderContainer);
+
+
+
