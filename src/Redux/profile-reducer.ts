@@ -1,12 +1,48 @@
-import {PostsType, ActionsTypes, ProfilePageType, ProfileType} from "../types/entities";
 import { DispatchType } from "./users-reducer";
-import {userAPI} from "../api/api";
+import {ProfileApi, userAPI} from "../api/api";
+import {ActionsTypes} from "../types/entities";
 
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_STATUS = 'SET-STATUS';
 
+
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+    profile: ProfileType | null
+    status: string
+}
+
+export type ProfileType = {
+    aboutMe: string | null,
+    contacts: {
+        facebook: string | null,
+        website: string | null,
+        vk: string | null,
+        twitter: string | null,
+        instagram: string | null,
+        youtube: string | null,
+        github: string | null,
+        mainLink: string | null,
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: null | string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string | undefined,
+        large: string | undefined,
+    }
+}
 
 const initialState: ProfilePageType = {
     newPostText: "Hello",
@@ -14,7 +50,8 @@ const initialState: ProfilePageType = {
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "It`s my first post", likesCount: 40},
     ],
-    profile: null
+    profile: null,
+    status: ""
 }
 
 
@@ -41,7 +78,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
                 ...state,
                 profile: action.profile
             }
-
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
 
         default:
             return state;
@@ -50,11 +91,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 }
 
 
+
+
 export const addPostAC = (newPostText: string) => ({type: ADD_POST, postMessage: newPostText}) as const;
 
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const;
 
-
+export const setStatusAC = (status: string)  => ({type: SET_STATUS, status}) as const;
 
 export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText}) as const;
 
@@ -66,6 +109,20 @@ export const getUserProfile = (userId: string) => (dispatch: DispatchType) => {
     });
 }
 
+export const getStatus = (userId: string) => (dispatch: DispatchType) => {
+    ProfileApi.getStatus (userId).then(response => {
+        dispatch(setStatusAC(response.data))
+    });
+}
+
+export const updateStatus = (status: string) => (dispatch: DispatchType) => {
+    ProfileApi.updateStatus (status).then(response => {
+        if(response.data.resultCode === 0) {
+            dispatch(setStatusAC(status))
+        }
+
+    });
+}
 
 
 

@@ -1,4 +1,3 @@
-import {addPostAC, updateNewPostTextAC, setUserProfileAC} from "../Redux/profile-reducer";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogs-reducer";
 import {
     followSuccess,
@@ -10,43 +9,8 @@ import {
     toggleIsFollowingProgress
 } from "../Redux/users-reducer";
 import {setAuthUserData, AuthType} from "../Redux/auth-reducer";
+import {addPostAC, ProfilePageType, setStatusAC, setUserProfileAC, updateNewPostTextAC} from "../Redux/profile-reducer";
 
-
-
-
-export type PostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
-    profile: ProfileType | null
-}
-
-export type ProfileType = {
-    aboutMe: string | null,
-    contacts: {
-        facebook: string | null,
-        website: string | null,
-        vk: string | null,
-        twitter: string | null,
-        instagram: string | null,
-        youtube: string | null,
-        github: string | null,
-        mainLink: string | null,
-    },
-    lookingForAJob: boolean,
-    lookingForAJobDescription: null | string,
-    fullName: string,
-    userId: number,
-    photos: {
-        small: string | undefined,
-        large: string | undefined,
-    }
-}
 
 
 
@@ -77,11 +41,21 @@ export type RootStateType = {
     auth: AuthType
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof updateNewMessageBodyCreator> | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof followSuccess> | ReturnType<typeof unfollowSuccess> | ReturnType<typeof setUsers>
-    | ReturnType<typeof setCurrentPage> | ReturnType<typeof  setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
-    | ReturnType<typeof setUserProfileAC> | ReturnType<typeof setAuthUserData> | ReturnType<typeof toggleIsFollowingProgress>
+export type ActionsTypes =
+    ReturnType<typeof setStatusAC>
+    | ReturnType<typeof addPostAC>
+    | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyCreator>
+    | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof  setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toggleIsFollowingProgress>
 
 
 // export type StoreType = {

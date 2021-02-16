@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActionsTypes, RootStateType} from "../../../types/entities";
+import {RootStateType, ActionsTypes} from "../../../types/entities";
 import {addPostAC, updateNewPostTextAC} from '../../../Redux/profile-reducer';
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
