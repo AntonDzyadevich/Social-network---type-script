@@ -5,7 +5,6 @@ import {ActionsTypes} from "../types/entities";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_STATUS = 'SET-STATUS';
 
 
@@ -17,7 +16,6 @@ export type PostsType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
     profile: ProfileType | null
     status: string
 }
@@ -45,7 +43,6 @@ export type ProfileType = {
 }
 
 const initialState: ProfilePageType = {
-    newPostText: "Hello",
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "It`s my first post", likesCount: 40},
@@ -60,18 +57,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
         case ADD_POST:
             let newPost: PostsType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
+
             }
         case SET_USER_PROFILE:
             return {
@@ -93,13 +85,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 
 
 
-export const addPostAC = (newPostText: string) => ({type: ADD_POST, postMessage: newPostText}) as const;
+export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText}) as const;
 
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const;
 
 export const setStatusAC = (status: string)  => ({type: SET_STATUS, status}) as const;
 
-export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText}) as const;
+
 
 
 // thunk creator

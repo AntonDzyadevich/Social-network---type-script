@@ -1,7 +1,6 @@
 import {ActionsTypes, DialogsPageType} from "../types/entities";
 
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 
@@ -22,21 +21,15 @@ const initialState = {
         {id: 5, message: "Hi, how are you?"},
         {id: 6, message: "Hello"}
     ],
-    newMessageBody: ""
+
 }
 
  const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
      switch (action.type) {
-         case UPDATE_NEW_MESSAGE_BODY:
-             return {
-                 ...state,
-                 newMessageBody: action.body
-             };
          case SEND_MESSAGE:
-             let body = state.newMessageBody;
+             let body = action.newMessageBody;
              return  {
                  ...state,
-                 newMessageBody: "",
                  messages: [...state.messages, {id: 7, message: body}]
              };
          default:
@@ -44,9 +37,8 @@ const initialState = {
      }
  }
 
-export const sendMessageCreator = () => ({type: SEND_MESSAGE}) as const;
+export const sendMessageCreator = (newMessageBody: string) => ({type: SEND_MESSAGE, newMessageBody}) as const;
 
-export const updateNewMessageBodyCreator = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body}) as const;
 
 
 

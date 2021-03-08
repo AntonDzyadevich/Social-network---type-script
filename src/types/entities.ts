@@ -1,4 +1,4 @@
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../Redux/dialogs-reducer";
+import {sendMessageCreator} from "../Redux/dialogs-reducer";
 import {
     followSuccess,
     setCurrentPage,
@@ -9,7 +9,7 @@ import {
     toggleIsFollowingProgress
 } from "../Redux/users-reducer";
 import {setAuthUserData, AuthType} from "../Redux/auth-reducer";
-import {addPostAC, ProfilePageType, setStatusAC, setUserProfileAC, updateNewPostTextAC} from "../Redux/profile-reducer";
+import {addPostAC, ProfilePageType, setStatusAC, setUserProfileAC} from "../Redux/profile-reducer";
 
 
 
@@ -28,7 +28,7 @@ export type MessagesType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    newMessageBody: string
+
 }
 
 export type SidebarType = {}
@@ -45,8 +45,6 @@ export type ActionsTypes =
     ReturnType<typeof setStatusAC>
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfileAC>
-    | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>

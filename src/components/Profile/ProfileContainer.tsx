@@ -5,7 +5,6 @@ import { RootStateType} from "../../types/entities";
 import {connect} from "react-redux";
 import {getStatus, getUserProfile, ProfileType, updateStatus} from "../../Redux/profile-reducer";
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-
 import { compose } from 'redux';
 
 
