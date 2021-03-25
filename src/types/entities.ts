@@ -8,7 +8,7 @@ import {
     UsersPageType,
     toggleIsFollowingProgress
 } from "../Redux/users-reducer";
-import {setAuthUserData, AuthType} from "../Redux/auth-reducer";
+import {AuthType, setAuthUserData} from "../Redux/auth-reducer";
 import {addPostAC, ProfilePageType, setStatusAC, setUserProfileAC} from "../Redux/profile-reducer";
 
 
@@ -46,15 +46,14 @@ export type ActionsTypes =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof followSuccess>
-    | ReturnType<typeof unfollowSuccess>
-    | ReturnType<typeof setUsers>
-    | ReturnType<typeof setCurrentPage>
-    | ReturnType<typeof  setTotalUsersCount>
-    | ReturnType<typeof toggleIsFetching>
-    | ReturnType<typeof setAuthUserData>
-    | ReturnType<typeof toggleIsFollowingProgress>
-
+    // | ReturnType<typeof followSuccess>
+    // | ReturnType<typeof unfollowSuccess>
+    // | ReturnType<typeof setUsers>
+    // | ReturnType<typeof setCurrentPage>
+    // | ReturnType<typeof  setTotalUsersCount>
+    // | ReturnType<typeof toggleIsFetching>
+    // | ReturnType<typeof toggleIsFollowingProgress>
+    // | ReturnType<typeof setAuthUserData>
 
 // export type StoreType = {
 //     _state: RootStateType

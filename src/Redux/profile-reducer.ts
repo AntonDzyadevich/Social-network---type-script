@@ -1,6 +1,6 @@
-import { DispatchType } from "./users-reducer";
 import {ProfileApi, userAPI} from "../api/api";
 import {ActionsTypes} from "../types/entities";
+import {Dispatch} from "redux";
 
 
 const ADD_POST = 'ADD-POST';
@@ -41,6 +41,9 @@ export type ProfileType = {
         large: string | undefined,
     }
 }
+
+type DispatchType = Dispatch<ActionsTypes>
+
 
 const initialState: ProfilePageType = {
     posts: [
