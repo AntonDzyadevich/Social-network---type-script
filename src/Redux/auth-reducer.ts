@@ -1,6 +1,7 @@
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {BaseThunkType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 
 export type AuthType = {
@@ -60,10 +61,15 @@ export const getAuthUserData = () => (dispatch: DispatchType)=> {
         });
 };
 export const login = (email: string , password: string, rememberMe: boolean) => (dispatch: any) => {
+
+
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if(response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
+            }else {
+              const message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+                dispatch(stopSubmit("login", {_error: message}))
             }
         });
 };

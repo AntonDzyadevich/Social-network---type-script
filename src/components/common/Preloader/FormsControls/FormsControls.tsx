@@ -9,7 +9,8 @@ type FormControlPropsType = {
 
 
 
-export const FormControl: React.FC<FormControlPropsType> = ({ meta:{touched, error}, children}) => {
+export const FormControl: React.FC<FormControlPropsType> =
+    ({ meta:{touched, error}, children}) => {
     const hasError =  touched && error
 
     return (

@@ -11,11 +11,13 @@ import { compose } from 'redux';
 type MapStatePropsType = {
     profile: ProfileType | null
     status: string
+    authorizedUserId: number | null
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
-    getUserProfile:(userId: string) => void
-    getStatus: (userId: string) => void
+    getUserProfile:(userId: number) => void
+    getStatus: (userId: number) => void
     updateStatus: (status: string) => void
 }
 
@@ -34,18 +36,25 @@ class ProfileContainer extends React.Component<PropsType>{
 
     componentDidMount() {
 
-        let userId = this.props.match.params.userId;
+        let userId: number | null = +this.props.match.params.userId;
         if(!userId) {
-            userId = '13173';
+            userId = this.props.authorizedUserId;
         }
-        this.props.getUserProfile(userId)
-        this.props.getStatus(userId)
+        if(!userId) {
+            console.error("ID should exist in URI params or in state('authorizedUzerId ')")
+        }else{
+            this.props.getUserProfile(userId)
+            this.props.getStatus(userId)
+        }
+
     }
 
     render() {
 
         return (
-            <Profile {...this.props} profile={ this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props} profile={ this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         )
     }
 }
@@ -54,12 +63,14 @@ class ProfileContainer extends React.Component<PropsType>{
 const mapStateToProps = (state:RootStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth
     }
 }
 
 export default compose<React.ComponentType>(
-    connect<MapStatePropsType,MapDispatchPropsType, {} , RootStateType>(mapStateToProps,
+    connect<MapStatePropsType, {}, MapDispatchPropsType, RootStateType>(mapStateToProps,
         {getUserProfile, getStatus, updateStatus}),
     withRouter,
     // withAuthRedirect,
