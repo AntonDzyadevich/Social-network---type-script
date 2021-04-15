@@ -3,7 +3,7 @@ import {WrappedFieldMetaProps, WrappedFieldProps} from 'redux-form';
 import styles from "./FormsControls.module.css"
 
 
-type FormControlPropsType = {
+export type FormControlPropsType = {
     meta: WrappedFieldMetaProps
 }
 

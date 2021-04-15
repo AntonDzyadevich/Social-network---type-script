@@ -10,6 +10,7 @@ import {
 } from "../Redux/users-reducer";
 import {AuthType, setAuthUserData} from "../Redux/auth-reducer";
 import {addPostAC, ProfilePageType, setStatusAC, setUserProfileAC} from "../Redux/profile-reducer";
+import {AppType} from "../Redux/app-reducer";
 
 
 
@@ -39,6 +40,7 @@ export type RootStateType = {
     sidebar: SidebarType
     usersPage: UsersPageType
     auth: AuthType
+    app: AppType
 }
 
 export type ActionsTypes =

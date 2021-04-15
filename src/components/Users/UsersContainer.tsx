@@ -1,13 +1,19 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {RootStateType} from "../../types/entities";
+
 import {
     UsersType,
-    getUsers, follow, unfollow} from '../../Redux/users-reducer';
+    requestUsers, follow, unfollow} from '../../Redux/users-reducer';
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
+import {
+    getCurrentPage,
+    getFollowingInProgress, getIsFetching,
+    getPageSize,
+    getTotalUsersCount, getUsers
+} from '../../Redux/users-selector';
+import {RootStateType} from "../../Redux/redux-store";
 
 
 
@@ -58,19 +64,32 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     }
 }
 
+// const mapStateToProps = (state: RootStateType):MapStatePropsType => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// }
+
 const mapStateToProps = (state: RootStateType):MapStatePropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
+
+
+
 export default compose<React.ComponentType>(
-    withAuthRedirect,
     connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateType>(mapStateToProps, {
-        follow, unfollow , getUsers })
+        follow, unfollow , getUsers: requestUsers })
 ) (UsersContainer)

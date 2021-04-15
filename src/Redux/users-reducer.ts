@@ -1,7 +1,7 @@
 import {RootStateType} from "../types/entities";
 import {userAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {BaseThunkType} from "./redux-store";
+
 
 // const FOLLOW = 'FOLLOW';
 // const UNFOLLOW = 'UNFOLLOW';
@@ -100,7 +100,7 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes)
 
 type GetStateType = () => RootStateType
 type DispatchType = Dispatch<ActionsTypes>
-type ThunkType = BaseThunkType<ActionsTypes>
+
 
 
 export type ActionsTypes = | ReturnType<typeof followSuccess>
@@ -124,10 +124,11 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) =
 
 
 //thunk-creators
-export const getUsers = (currentPage: number, pageSize: number ) => {
+export const requestUsers = (page: number, pageSize: number ) => {
     return (dispatch: DispatchType, getState: GetStateType) => {
         dispatch(toggleIsFetching(true))
-        userAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPage(page))
+        userAPI.getUsers(page, pageSize).then(data => {
             dispatch(toggleIsFetching(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));

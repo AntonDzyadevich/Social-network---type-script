@@ -10,7 +10,7 @@ import s from '../common/Preloader/FormsControls/FormsControls.module.css'
 
 
 
-type FormDataType = {
+export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean

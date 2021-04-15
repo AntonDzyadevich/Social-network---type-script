@@ -6,20 +6,16 @@ import * as serviceWorker from './serviceWorker';
 import {RootStateType} from "./types/entities";
 import store from './Redux/redux-store';
 import {Provider} from "react-redux";
+import {BrowserRouter} from 'react-router-dom';
 
 
-
-
-    ReactDOM.render(
-        <React.StrictMode>
-            <Provider store={store}>
-            < App />
-            </Provider>
-        </React.StrictMode>,
-        document.getElementById('root'));
-
-
-
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <BrowserRouter> < App/> </BrowserRouter>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root'));
 
 
 // renderTree(store.getState())
@@ -27,9 +23,6 @@ import {Provider} from "react-redux";
 //     const state = store.getState()
 //     renderTree(state);
 // })
-
-
-
 
 
 // If you want your app to work offline and load faster, you can change
