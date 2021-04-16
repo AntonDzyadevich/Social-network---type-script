@@ -11,7 +11,8 @@ import {
     getCurrentPage,
     getFollowingInProgress, getIsFetching,
     getPageSize,
-    getTotalUsersCount, getUsers
+    getTotalUsersCount,
+    getUsers,
 } from '../../Redux/users-selector';
 import {RootStateType} from "../../Redux/redux-store";
 
@@ -77,6 +78,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 
 const mapStateToProps = (state: RootStateType):MapStatePropsType => {
     return {
+        // users: getUsers(state),
         users: getUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),

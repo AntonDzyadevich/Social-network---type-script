@@ -1,8 +1,15 @@
 import { RootStateType } from "./redux-store"
+import {createSelector} from "reselect";
+import {UsersType} from "./users-reducer";
 
-export const getUsers = (state: RootStateType) => {
+const getUsersSelector = (state: RootStateType) => {
     return state.usersPage.users
 }
+
+export const getUsers = createSelector(getUsersSelector, (users: Array<UsersType>) => {
+   return  users.filter(u => true);
+})
+
 
 export const getPageSize = (state: RootStateType) => {
     return state.usersPage.pageSize
@@ -23,3 +30,7 @@ export const getIsFetching = (state: RootStateType) => {
 export const getFollowingInProgress = (state: RootStateType) => {
     return state.usersPage.followingInProgress
 }
+
+
+
+
