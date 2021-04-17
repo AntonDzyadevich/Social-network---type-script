@@ -54,7 +54,6 @@ type DispatchType = Dispatch<ActionsTypes>
 
 export const getAuthUserData = (): ThunkAction<void, RootStateType,
     unknown, ActionsTypes> => (dispatch: DispatchType)=> {
-    debugger;
     return authAPI.me()
         .then(response => {
             if(response.data.resultCode === 0) {

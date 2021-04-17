@@ -8,11 +8,10 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import {connect} from "react-redux";
-import {RootStateType} from "./types/entities";
-
 import {initializeApp} from "./Redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import { compose } from 'redux';
+import {RootStateType} from "./Redux/redux-store";
 
 
 
@@ -55,9 +54,13 @@ class App extends React.Component<MapDispatchPropsType & MapStatePropsType> {
     }
 }
 
-const mapStateToProps = (state: RootStateType):MapStatePropsType => ({ initialized: state.app.initialized})
+const mapStateToProps = (state: RootStateType):MapStatePropsType => ({
+    initialized: state.app.initialized
+})
 
 
-export default compose<React.ComponentType>(withRouter,
-    connect<MapStatePropsType, {}, MapDispatchPropsType, RootStateType>(mapStateToProps, {initializeApp})) (App);
+export default compose<React.ComponentType>(
+    withRouter,
+    connect<MapStatePropsType, {}, MapDispatchPropsType, RootStateType>
+    (mapStateToProps, {initializeApp}) ) (App) ;
 

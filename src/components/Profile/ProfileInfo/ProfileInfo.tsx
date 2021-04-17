@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
 import defaultAvatar from "../../../assets/images/defaultAvatar.gif"
 import ProfileStatus from "../ProfileStatus";
+import ProfileStatusWithHook from "../ProfileStatusWithHook";
 
 
 
@@ -17,7 +18,7 @@ const ProfileInfo: React.FC<ProfilePropsType> = ({profile, status, updateStatus}
     return <div>
         <div className={s.descriptionBlock}>
             <img src = { photo } />
-           < ProfileStatus status={status} updateStatus={updateStatus}/>
+           < ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
         </div>
     </div>
 }
