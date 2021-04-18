@@ -14,7 +14,9 @@ const MyPosts:React.FC<{posts: Array<PostsType>,
                         // updateNewPostText: (text:string) => void
                         addPost: (newPostText: string) => void}> = React.memo((props) => {
     console.log("RENDER")
-    let postsElements = props.posts.map(p => < Post id={p.id} key={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElements =[...props.posts]
+        .reverse()
+        .map(p => < Post id={p.id} key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     let onAddPost = (values: any) => {
         props.addPost(values.newPostText);

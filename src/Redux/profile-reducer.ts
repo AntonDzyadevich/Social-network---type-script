@@ -1,11 +1,12 @@
 import {ProfileApi, userAPI} from "../api/api";
-import {ActionsTypes} from "../types/entities";
 import {Dispatch} from "redux";
+
 
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
+const DELETE_POST = 'DELETE-POST';
 
 
 export type PostsType = {
@@ -55,6 +56,13 @@ const initialState: ProfilePageType = {
 }
 
 
+
+type ActionsTypes =   ReturnType<typeof setStatusAC>
+    | ReturnType<typeof addPostAC>
+    | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof deletePost>
+
+
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
@@ -78,7 +86,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
                 ...state,
                 status: action.status
             }
-
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id != action.postId)
+            }
         default:
             return state;
     }
@@ -93,6 +105,8 @@ export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText}
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const;
 
 export const setStatusAC = (status: string)  => ({type: SET_STATUS, status}) as const;
+
+export const deletePost = (postId: number)  => ({type: DELETE_POST, postId}) as const;
 
 
 
