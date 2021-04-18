@@ -17,7 +17,7 @@ import {RootStateType} from "./Redux/redux-store";
 
 
 type MapDispatchPropsType = {
-    getAuthUserData: () => void
+    initializeApp: () => void
 }
 type MapStatePropsType = {
     initialized: boolean
@@ -27,8 +27,7 @@ type MapStatePropsType = {
 class App extends React.Component<MapDispatchPropsType & MapStatePropsType> {
 
     componentDidMount() {
-        this.props.getAuthUserData();
-
+        this.props.initializeApp();
     }
 
     render() {

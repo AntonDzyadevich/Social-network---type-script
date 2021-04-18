@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { PostsType } from '../../../Redux/profile-reducer';
@@ -12,8 +12,8 @@ import {Textarea} from "../../common/Preloader/FormsControls/FormsControls";
 const MyPosts:React.FC<{posts: Array<PostsType>,
                         // newPostText: string,
                         // updateNewPostText: (text:string) => void
-                        addPost: (newPostText: string) => void}> = (props) => {
-
+                        addPost: (newPostText: string) => void}> = React.memo((props) => {
+    console.log("RENDER")
     let postsElements = props.posts.map(p => < Post id={p.id} key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     let onAddPost = (values: any) => {
@@ -29,7 +29,9 @@ const MyPosts:React.FC<{posts: Array<PostsType>,
             </div>
         </div>
     )
-}
+})
+
+
 
 
 type FormDataType = {

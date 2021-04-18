@@ -51,17 +51,27 @@ type GetStateType = () => RootStateType
 type DispatchType = Dispatch<ActionsTypes>
 // thunk creator
 
+// export const getAuthUserData = (): ThunkAction<void, RootStateType,
+//     unknown, ActionsTypes> => (dispatch: DispatchType)=> {
+//     return authAPI.me()
+//         .then(response => {
+//             if(response.data.resultCode === 0) {
+//                 let {userId,email,login} = response.data.data
+//                 dispatch (setAuthUserData(userId, email, login, true))
+//             }
+//         });
+// };
 
-export const getAuthUserData = (): ThunkAction<void, RootStateType,
-    unknown, ActionsTypes> => (dispatch: DispatchType)=> {
-    return authAPI.me()
-        .then(response => {
-            if(response.data.resultCode === 0) {
-                let {userId,email,login} = response.data.data
-                dispatch (setAuthUserData(userId, email, login, true))
-            }
-        });
-};
+export const getAuthUserData = () => async (dispatch: DispatchType) => {
+    let response = await authAPI.me();
+
+    if (response.data.resultCode === 0) {
+        let {id, login, email} = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+    }
+}
+
+
 export const login = (email: string , password: string, rememberMe: boolean): ThunkAction<void, RootStateType,
     unknown, ActionsTypes | FormAction> => (dispatch) => {
     authAPI.login(email, password, rememberMe)
