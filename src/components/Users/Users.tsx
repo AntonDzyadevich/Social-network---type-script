@@ -1,9 +1,7 @@
 import React from 'react';
-import s from "./Users.module.css";
-import userPhoto from "../../assets/images/Anton.jpg";
 import {UsersType} from "../../Redux/users-reducer";
-import { NavLink } from 'react-router-dom';
-
+import Paginator from '../common/Paginator/Paginator';
+import User from './User';
 
 
 export type UsersPropsType = {
@@ -18,63 +16,31 @@ export type UsersPropsType = {
 }
 
 const Users: React.FC<UsersPropsType> = ({
-                                            users,
-                                            pageSize,
-                                            totalUsersCount,
-                                            currentPage,
-                                            follow,
-                                            unfollow,
-                                            onPageChanged,
-                                            followingInProgress
-                                        }) => {
-
-    const pagesCount = Math.ceil(totalUsersCount / pageSize);
-    const pages = [];
-    for(let i=1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-
+                                             users,
+                                             pageSize,
+                                             totalUsersCount,
+                                             currentPage,
+                                             follow,
+                                             unfollow,
+                                             onPageChanged,
+                                             followingInProgress
+                                         }) => {
 
     return <div>
+        <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
+                   totalUsersCount={totalUsersCount} pageSize={pageSize}/>
+
         <div>
-            {pages.map(p => {
-                return   <span  className = { currentPage === p ? s.selectedPage : " " }
-                               onClick={ (e) => { onPageChanged(p)} }>{p}</span>
-            })}
+            {
+                users.map(u => <User user={u}
+                                     followingInProgress={followingInProgress}
+                                     key={u.id}
+                                     unfollow={unfollow}
+                                     follow={follow}
 
+                />)
+            }
         </div>
-        {
-            users.map(u => <div key={u.id}>
-                <span>
-                    <div className={s.photo}>
-                       <NavLink to={'profile/' + u.id}> <img src={u.photos.small !== null ? u.photos.small : userPhoto}/></NavLink>
-                    </div>
-                    <div>
-                        {u.followed
-                            ? <button disabled={followingInProgress
-                                .some(id => id === u.id)}
-                                      onClick={() => {unfollow(u.id)}}>Unfollow
-                        </button>
-
-                            : <button  disabled={followingInProgress.some(id => id === u.id)}
-                                       onClick={() => {follow(u.id)}}>Follow
-                            </button>
-                        }
-                    </div>
-                </span>
-                <span>
-                    <span>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </span>
-                    <span>
-                        <div>{"u.location.country"}</div>
-                        <div>{"u.location.city"}</div>
-                    </span>
-                </span>
-            </div>)
-
-        }
     </div>
 }
 

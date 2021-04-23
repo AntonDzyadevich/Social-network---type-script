@@ -2,6 +2,7 @@ import {RootStateType} from "../types/entities";
 import {userAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
+import { updateObjectInArray } from "../utils/objects-helpers";
 
 
 // const FOLLOW = 'FOLLOW';
@@ -48,25 +49,19 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes)
         case 'FOLLOW':
             return  {
                 ...state,
-                // users: [...state, users],
-                users: state.users.map(u => {
-                    if(u.id === action.userId){
-                        return {...u, followed: true}
-                    }
-                    return u;
-                }),
-
+                users: updateObjectInArray(state.users,action.userId,"id", {followed: true})
             }
         case 'UNFOLLOW':
             return {
                 ...state,
-                // users: [...state, users],
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users,action.userId,"id", {followed: false})
+                // // users: [...state, users],
+                // users: state.users.map(u => {
+                //     if (u.id === action.userId) {
+                //         return {...u, followed: false}
+                //     }
+                //     return u;
+                // })
             }
         case 'SET-USERS':
             return{
@@ -184,12 +179,6 @@ export const unfollow = (userId: number): ThunkAction<void, RootStateType,
         await _followUnfollowFlow(dispatch, userId, userAPI.unfollow.bind(userAPI), unfollowSuccess)
     }
 }
-
-
-
-
-
-
 
 
 // export const follow = (userId: number): ThunkAction<void, RootStateType,
