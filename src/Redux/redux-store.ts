@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware, Action} from "redux";
+import {createStore, combineReducers, applyMiddleware, Action, compose} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
@@ -27,9 +27,13 @@ export type RootStateType = ReturnType<ReducersType>
 // export type BaseThunkType<A extends Action,R = Promise<void>> =  ThunkAction<R, RootStateType, unknown, A>
 
 
-const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 // @ts-ignore
-window.store = store
+window.__store__ = store
 
 export default store;
