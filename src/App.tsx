@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
+import {HashRouter, Route, withRouter} from 'react-router-dom';
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
@@ -50,11 +50,7 @@ class App extends React.Component<MapDispatchPropsType & MapStatePropsType> {
                         <Route path='/dialogs'
                                render={withSuspense(DialogsContainer)}/>
                         <Route path='/profile/:userId?'
-                               render={() => {
-                                   return <Suspense fallback={<div>Loading...</div>}>
-                                       < ProfileContainer/>
-                                   </Suspense>
-                               }}/>
+                               render={withSuspense(ProfileContainer)}/>
                         <Route path='/users' render={() => < UsersContainer/>}/>
                         <Route path='/login' render={() => < LoginPage/>}/>
 
@@ -75,11 +71,11 @@ const AppContainer =  compose<React.ComponentType>(
     (mapStateToProps, {initializeApp}) ) (App) ;
 
 const SamuraiJSApp: React.FC = () => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SamuraiJSApp;
