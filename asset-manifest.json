@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/Social-network-typeScript/static/css/main.f20c3f52.chunk.css",
+    "main.js": "/Social-network-typeScript/static/js/main.2e042a65.chunk.js",
+    "main.js.map": "/Social-network-typeScript/static/js/main.2e042a65.chunk.js.map",
+    "runtime-main.js": "/Social-network-typeScript/static/js/runtime-main.3bb12fc4.js",
+    "runtime-main.js.map": "/Social-network-typeScript/static/js/runtime-main.3bb12fc4.js.map",
+    "static/js/2.137fd818.chunk.js": "/Social-network-typeScript/static/js/2.137fd818.chunk.js",
+    "static/js/2.137fd818.chunk.js.map": "/Social-network-typeScript/static/js/2.137fd818.chunk.js.map",
+    "static/css/3.8248489f.chunk.css": "/Social-network-typeScript/static/css/3.8248489f.chunk.css",
+    "static/js/3.b6ec23e4.chunk.js": "/Social-network-typeScript/static/js/3.b6ec23e4.chunk.js",
+    "static/js/3.b6ec23e4.chunk.js.map": "/Social-network-typeScript/static/js/3.b6ec23e4.chunk.js.map",
+    "static/css/4.af30c192.chunk.css": "/Social-network-typeScript/static/css/4.af30c192.chunk.css",
+    "static/js/4.fa89d820.chunk.js": "/Social-network-typeScript/static/js/4.fa89d820.chunk.js",
+    "static/js/4.fa89d820.chunk.js.map": "/Social-network-typeScript/static/js/4.fa89d820.chunk.js.map",
+    "index.html": "/Social-network-typeScript/index.html",
+    "precache-manifest.2c78857fefd609f4f1ff997c95d57bba.js": "/Social-network-typeScript/precache-manifest.2c78857fefd609f4f1ff997c95d57bba.js",
+    "service-worker.js": "/Social-network-typeScript/service-worker.js",
+    "static/css/3.8248489f.chunk.css.map": "/Social-network-typeScript/static/css/3.8248489f.chunk.css.map",
+    "static/css/4.af30c192.chunk.css.map": "/Social-network-typeScript/static/css/4.af30c192.chunk.css.map",
+    "static/css/main.f20c3f52.chunk.css.map": "/Social-network-typeScript/static/css/main.f20c3f52.chunk.css.map",
+    "static/js/2.137fd818.chunk.js.LICENSE.txt": "/Social-network-typeScript/static/js/2.137fd818.chunk.js.LICENSE.txt",
+    "static/media/defaultAvatar.gif": "/Social-network-typeScript/static/media/defaultAvatar.7adfc976.gif",
+    "static/media/preloader.svg": "/Social-network-typeScript/static/media/preloader.fcac5c4d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3bb12fc4.js",
+    "static/js/2.137fd818.chunk.js",
+    "static/css/main.f20c3f52.chunk.css",
+    "static/js/main.2e042a65.chunk.js"
+  ]
+}
