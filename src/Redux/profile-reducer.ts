@@ -6,6 +6,8 @@ const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 const DELETE_POST = 'DELETE-POST';
+const SAVE_PHOTO_SUCCESS = 'SAVE-PHOTO-SUCCESS';
+
 
 
 export type PostsType = {
@@ -20,38 +22,65 @@ export type ProfilePageType = {
     status: string
 }
 
+export type PhotosType = {
+    small: string | null
+    large: string | null
+}
+
+export type ContactsType = {
+    facebook: string | null,
+    website: string | null,
+    vk: string | null,
+    twitter: string | null,
+    instagram: string | null,
+    youtube: string | null,
+    github: string | null,
+    mainLink: string | null,
+}
+
 export type ProfileType = {
-    aboutMe: string | null,
-    contacts: {
-        facebook: string | null,
-        website: string | null,
-        vk: string | null,
-        twitter: string | null,
-        instagram: string | null,
-        youtube: string | null,
-        github: string | null,
-        mainLink: string | null,
-    },
     lookingForAJob: boolean,
     lookingForAJobDescription: null | string,
     fullName: string,
     userId: number,
-    photos: {
-        small: string | undefined,
-        large: string | undefined,
-    }
+    contacts: ContactsType,
+    photos: PhotosType,
+    aboutMe: string | null
 }
 
+
+// export type ProfileType = {
+//     aboutMe: string | null,
+//     contacts: {
+//         facebook: string | null,
+//         website: string | null,
+//         vk: string | null,
+//         twitter: string | null,
+//         instagram: string | null,
+//         youtube: string | null,
+//         github: string | null,
+//         mainLink: string | null,
+//     },
+//     lookingForAJob: boolean,
+//     lookingForAJobDescription: null | string,
+//     fullName: string,
+//     userId: number,
+//     photos: {
+//         small: string | undefined,
+//         large: string | undefined,
+//     }
+// }
+
 type DispatchType = Dispatch<ActionsTypes>
+export type InitialStateType = typeof initialState
 
-
-const initialState: ProfilePageType = {
+const initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "It`s my first post", likesCount: 40},
-    ],
-    profile: null,
-    status: ""
+    ] as Array<PostsType>,
+    profile: null as ProfileType | null,
+    status: "",
 }
 
 
@@ -59,9 +88,10 @@ type ActionsTypes = ReturnType<typeof setStatusAC>
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhotoSuccess>
 
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes):  InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostsType = {
@@ -84,6 +114,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos} as ProfileType
+            }
         case DELETE_POST:
             return {
                 ...state,
@@ -104,6 +139,8 @@ export const setStatusAC = (status: string) => ({type: SET_STATUS, status}) as c
 
 export const deletePost = (postId: number) => ({type: DELETE_POST, postId}) as const;
 
+export const savePhotoSuccess = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, photos}) as const;
+
 
 // thunk creator
 export const getUserProfile = (userId: string) => async (dispatch: DispatchType) => {
@@ -122,7 +159,12 @@ export const updateStatus = (status: string) => async (dispatch: DispatchType) =
         dispatch(setStatusAC(status))
     }
 }
-
+export const savePhoto = (file: any) => async (dispatch: DispatchType) => {
+    let response = await ProfileApi.updateStatus(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
 
 export default profileReducer;
 
