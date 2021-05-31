@@ -42,7 +42,7 @@ const ProfileStatusWithHook: React.FC<ProfileStatusPropsType>= (props) =>  {
             <div>
                 {!editMode &&
                 <div>
-                    <span onDoubleClick={activateEditMode}>{props.status || "This I'am"}</span>
+                   <b>Status</b>: <span onDoubleClick={activateEditMode}>{props.status || "This I'am"}</span>
                 </div>
                 }
                 {editMode &&
