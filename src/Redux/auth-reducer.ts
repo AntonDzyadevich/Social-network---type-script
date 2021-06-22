@@ -5,8 +5,9 @@ import { RootStateType } from "./redux-store";
 import {ThunkAction} from "redux-thunk";
 
 
+
 export type AuthType = {
-    userId: number | null,
+    userId: number | null ,
     email: string | null,
     login: string | null,
     isAuth: boolean
@@ -20,10 +21,10 @@ const initialState = {
     isAuth: false,
 };
 
-// type InitialState = typeof initialState;
+type InitialStateType = typeof initialState;
 // type ThunkType = BaseThunkType<ActionsTypes>
 
-const authReducer = (state = initialState, action: ActionsTypes): AuthType=> {
+const authReducer = (state = initialState, action: ActionsTypes): InitialStateType=> {
     switch (action.type) {
         case 'social-network/auth/SET-USER-DATA':
             return {

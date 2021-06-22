@@ -1,5 +1,9 @@
 import {ProfileApi, userAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {BaseThunkType, InferActionsTypes, RootStateType} from "./redux-store";
+import {ThunkAction} from "redux-thunk";
+import {stopSubmit} from "redux-form";
+import actions, { FormAction } from "redux-form/lib/actions";
 
 
 const ADD_POST = 'ADD-POST';
@@ -72,7 +76,7 @@ export type ProfileType = {
 // }
 
 type DispatchType = Dispatch<ActionsTypes>
-export type InitialStateType = typeof initialState
+
 
 const initialState = {
     posts: [
@@ -143,7 +147,8 @@ export const savePhotoSuccess = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, pho
 
 
 // thunk creator
-export const getUserProfile = (userId: string) => async (dispatch: DispatchType) => {
+export const getUserProfile = (userId: number | null):ThunkType => async (dispatch, getState) => {
+
     let response = await userAPI.getProfile(userId)
     dispatch(setUserProfileAC(response.data))
 }
@@ -167,12 +172,22 @@ export const savePhoto = (file: any) => async (dispatch: DispatchType) => {
 }
 
 
-export const saveProfile = (profile: ProfileType) => async (dispatch: DispatchType) => {
-    let response = await ProfileApi.saveProfile(profile)
+export const saveProfile = (profile: ProfileType):ThunkType => async (dispatch,
+                                     getState) => {
+    const userId =  getState().auth.userId
+    let response = await ProfileApi.saveProfile(profile);
+
     if (response.data.resultCode === 0) {
-        // dispatch(savePhotoSuccess(response.data.data.photos))
+     dispatch(getUserProfile(userId) )
+    }else {
+        dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0] }));
+        return Promise.reject(response.data.messages[0])
     }
 }
+
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionsType | FormAction>
 
 
 export default profileReducer;

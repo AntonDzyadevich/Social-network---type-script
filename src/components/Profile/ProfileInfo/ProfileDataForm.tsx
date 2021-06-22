@@ -1,8 +1,8 @@
 import React from "react";
 import {ProfileType} from "../../../Redux/profile-reducer";
-import {createField, FieldValidatorType, Input, Textarea} from "../../common/Preloader/FormsControls/FormsControls";
-import {reduxForm} from "redux-form";
-import {LoginForm} from "../../Login/Login";
+import {createField, Input, Textarea} from "../../common/Preloader/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import s from './ProfileInfo.module.css';
 
 
 
@@ -10,9 +10,16 @@ import {LoginForm} from "../../Login/Login";
 type ProfileDataFormPropsType = {
     profile: ProfileType
 }
-const ProfileDataForm: React.FC<ProfileDataFormPropsType> = ({handleSubmit,profile}) => {
+const ProfileDataForm: React.FC<InjectedFormProps<ProfileType,
+    ProfileDataFormPropsType> & ProfileDataFormPropsType> = ({handleSubmit,
+                                                                                        profile,
+                                                                                        error}) => {
         return <form onSubmit={handleSubmit}>
         <div><button>save</button></div>
+            {error && <div className={s.formSummaryError}>
+                {error}
+            </div>
+            }
         <div>
             <b>Full name</b>: {createField("Full name", "full name", [], Input)}
         </div>
@@ -32,9 +39,11 @@ const ProfileDataForm: React.FC<ProfileDataFormPropsType> = ({handleSubmit,profi
             { createField("About me", "lookingForAJobDescription", [], Textarea )}
         </div>
         <div>
-        {/*    <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {*/}
-        {/*    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]}/>*/}
-        {/*})}*/}
+            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+            return <div key={key} className={s.contact}>
+            <b>{key}: {createField("Full name", "contacts" + key, [], Input)}</b>
+            </div>
+        })}
         </div>
 
     </form>

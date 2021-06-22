@@ -12,7 +12,7 @@ const  instance = axios.create({
 })
 
 export const  ProfileApi = {
-    getProfile (userId: string) {
+    getProfile (userId: number | null) {
         return instance.get(`profile/` + userId);
     },
     getStatus(userId: string) {
@@ -47,7 +47,7 @@ export const userAPI = {
     unfollow(userId: number) {
        return  instance.delete(`follow/${userId}`);
     },
-    getProfile (userId: string) {
+    getProfile (userId: number | null) {
         console.warn(' Obsolete method. Please profileAPI object.')
        return ProfileApi.getProfile(userId)
     }
