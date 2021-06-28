@@ -2,8 +2,9 @@ import React from 'react';
 import './Header.module.css';
 import Header from "./Header";
 import {connect} from "react-redux";
-import { RootStateType} from '../../types/entities';
+
 import {logout} from "../../Redux/auth-reducer";
+import {RootStateType} from "../../Redux/redux-store";
 
 
 export type MapStatePropsType = {

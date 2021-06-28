@@ -1,8 +1,9 @@
-import {RootStateType} from "../types/entities";
+
 import {userAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import { updateObjectInArray } from "../utils/objects-helpers";
+import {RootStateType} from "./redux-store";
 
 
 // const FOLLOW = 'FOLLOW';

@@ -1,8 +1,9 @@
 import React from 'react';
-import {RootStateType, ActionsTypes} from "../../../types/entities";
+import { ActionsTypes} from "../../../types/entities";
 import {addPostAC} from '../../../Redux/profile-reducer';
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {RootStateType} from "../../../Redux/redux-store";
 
 
 

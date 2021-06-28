@@ -1,16 +1,6 @@
 import {sendMessageCreator} from "../Redux/dialogs-reducer";
-import {
-    followSuccess,
-    setCurrentPage,
-    setUsers,
-    setTotalUsersCount, toggleIsFetching,
-    unfollowSuccess,
-    UsersPageType,
-    toggleIsFollowingProgress
-} from "../Redux/users-reducer";
-import {AuthType, setAuthUserData} from "../Redux/auth-reducer";
 import {addPostAC, ProfilePageType, setStatusAC, setUserProfileAC} from "../Redux/profile-reducer";
-import {AppType} from "../Redux/app-reducer";
+
 
 
 
@@ -34,14 +24,14 @@ export type DialogsPageType = {
 
 export type SidebarType = {}
 
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sidebar: SidebarType
-    usersPage: UsersPageType
-    auth: AuthType
-    app: AppType
-}
+// export type RootStateType = {
+//     profilePage: ProfilePageType
+//     dialogsPage: DialogsPageType
+//     sidebar: SidebarType
+//     usersPage: UsersPageType
+//     auth: AuthType
+//     app: AppType
+// }
 
 export type ActionsTypes =
     ReturnType<typeof setStatusAC>

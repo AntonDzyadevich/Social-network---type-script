@@ -1,5 +1,7 @@
 import axios from "axios";
 import {ProfileType} from "../Redux/profile-reducer";
+import {UserType} from "../components/Users/User";
+
 
 
 
@@ -10,6 +12,31 @@ const  instance = axios.create({
         "API-KEY": "2e8dfc3a-ddd8-4664-a36b-eb1d4d5042e7"
     }
 })
+
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1
+}
+
+export enum ResultCodeForCapcthaEnum {
+    CaptchaIsRequired = 10
+}
+
+export type GetItemsType = {
+    items: Array<UserType>
+    totalCount: number
+    error: string | null
+}
+export type APIResponseType<D = {}, RC = ResultCodesEnum> = {
+    data: D
+    messages: Array<string>
+    resultCode: RC
+}
+
+
+
+
+
 
 export const  ProfileApi = {
     getProfile (userId: number | null) {
@@ -58,7 +85,7 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`);
     },
-    login(email: string, password: string, rememberMe: boolean = false, captcha = null) {
+    login(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
         return instance.post(`auth/login`, {email, password, rememberMe, captcha});
     },
     logout() {
@@ -66,9 +93,16 @@ export const authAPI = {
     }
 }
 
+
+
+type GetCaptchaUrlResponseType = {
+    url: string
+}
+
+
 export const securityAPI = {
-    me() {
-        return instance.get(`security/get-captcha-url`);
+    getCaptchaUrl() {
+        return instance.get(`security/get-captcha-url`).then(res => res.data);
     }
 }
 

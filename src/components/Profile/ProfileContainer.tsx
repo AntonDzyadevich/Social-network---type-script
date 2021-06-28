@@ -1,7 +1,7 @@
 import React from 'react';
 import './Profile.module.css';
 import Profile from './Profile';
-import {RootStateType} from "../../types/entities";
+
 import {connect} from "react-redux";
 import {
     getStatus,
@@ -13,6 +13,7 @@ import {
 } from "../../Redux/profile-reducer";
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {compose} from 'redux';
+import {RootStateType} from "../../Redux/redux-store";
 
 
 type MapStatePropsType = {
